@@ -1,12 +1,14 @@
 """Module to represent the endpoints of Tutto API."""
 
+from __future__ import annotations
+
 import asyncio
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import date
 from typing import List
 
-from src.tutto_api_client.helpers.http import HTTPRequest
+from src.tutto_api_client.helpers.api_client import APIClient
 from src.tutto_api_client.models.authorization import Authorization
 from src.tutto_api_client.models.entities import Occurrence, Relative
 from src.tutto_api_client.utils.filter_clean_utils import (
@@ -22,7 +24,7 @@ __all__ = ["Endpoint"]
 class Endpoint(ABC):
     """Tutto API endpoint abstract dataclass with batteries included."""
 
-    http_client: HTTPRequest
+    http_client: APIClient
     authorization: Authorization
 
     @abstractmethod
@@ -32,13 +34,18 @@ class Endpoint(ABC):
     @abstractmethod
     def call(self, **kwargs) -> dict:
         """Abstract method to call the endpoint."""
+        # Avoids ("multiple values for argument 'headers'")
+        request_headers = {
+            **self.authorization.auth.as_bearer_token(),  # type: ignore
+            **kwargs.pop("headers", {}),
+        }
+        # Only GET endpoints poll for async results; POSTs default to a plain sync call
+        is_async = kwargs.pop("is_async", False)
         return asyncio.run(
-            self.http_client.request(
+            self.http_client.fetch_data(
+                is_async=is_async,
+                headers=request_headers,
                 **kwargs,
-                headers={
-                    **self.authorization.auth.as_bearer_token(),
-                    **kwargs.get("headers", {}),
-                },
             )
         )
 
@@ -69,11 +76,17 @@ class _Deductions(Endpoint):
             if field.name in self.__annotations__
         }
 
-    def call(self):
+    def call(self, timeout: float | None = None):
         endpoint = "deductions"
         method = "get"
         parameters = filter_dict_with_falsy_values(self.as_dict())
-        return super().call(endpoint=endpoint, method=method, parameters=parameters)
+        return super().call(
+            endpoint=endpoint,
+            method=method,
+            parameters=parameters,
+            is_async=True,
+            timeout=timeout,
+        )
 
 
 @dataclass(init=True, frozen=True)
@@ -100,11 +113,17 @@ class _Purchases(Endpoint):
             if field.name in self.__annotations__
         }
 
-    def call(self):
+    def call(self, timeout: float | None = None):
         endpoint = "purchases"
         method = "get"
         parameters = filter_dict_with_falsy_values(self.as_dict())
-        return super().call(endpoint=endpoint, method=method, parameters=parameters)
+        return super().call(
+            endpoint=endpoint,
+            method=method,
+            parameters=parameters,
+            is_async=True,
+            timeout=timeout,
+        )
 
 
 @dataclass(init=True, frozen=True)
@@ -114,10 +133,12 @@ class _ServiceTypes(Endpoint):
     def as_dict(self) -> dict:
         return {}
 
-    def call(self):
+    def call(self, timeout: float | None = None):
         endpoint = "service_types"
         method = "get"
-        return super().call(endpoint=endpoint, method=method)
+        return super().call(
+            endpoint=endpoint, method=method, is_async=True, timeout=timeout
+        )
 
 
 @dataclass(init=True, frozen=True)
@@ -148,11 +169,17 @@ class _DirfInfos(Endpoint):
             if field.name in self.__annotations__
         }
 
-    def call(self):
+    def call(self, timeout: float | None = None):
         endpoint = "dirf_infos"
         method = "get"
         parameters = filter_dict_with_falsy_values(self.as_dict())
-        return super().call(endpoint=endpoint, method=method, parameters=parameters)
+        return super().call(
+            endpoint=endpoint,
+            method=method,
+            parameters=parameters,
+            is_async=True,
+            timeout=timeout,
+        )
 
 
 @dataclass(init=True, frozen=True)
@@ -183,11 +210,17 @@ class _DirfAdditionalInfos(Endpoint):
             if field.name in self.__annotations__
         }
 
-    def call(self):
+    def call(self, timeout: float | None = None):
         endpoint = "dirf_additional_infos"
         method = "get"
         parameters = filter_dict_with_falsy_values(self.as_dict())
-        return super().call(endpoint=endpoint, method=method, parameters=parameters)
+        return super().call(
+            endpoint=endpoint,
+            method=method,
+            parameters=parameters,
+            is_async=True,
+            timeout=timeout,
+        )
 
 
 # POSTs
