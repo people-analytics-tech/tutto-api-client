@@ -5,16 +5,16 @@ from typing import Any
 from src.tutto_api_client.helpers.http import HTTPRequest
 from src.tutto_api_client.models.authorization import Authorization
 from src.tutto_api_client.models.endpoints import (
+    Endpoint,
     _Deductions,
-    _Purchases,
-    _ServiceTypes,
-    _DirfInfos,
     _DirfAdditionalInfos,
+    _DirfInfos,
     _Employees,
     _EmployeesOccupations,
     _Occupations,
+    _Purchases,
     _ServiceTickets,
-    Endpoint,
+    _ServiceTypes,
 )
 
 __all__ = []

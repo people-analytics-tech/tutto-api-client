@@ -1,18 +1,17 @@
 """Module to represent the endpoints of Tutto API."""
 
 import asyncio
-
-from typing import List
-from datetime import date
-from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
+from datetime import date
+from typing import List
 
 from src.tutto_api_client.helpers.http import HTTPRequest
-from src.tutto_api_client.models.entities import Relative, Occurrence
 from src.tutto_api_client.models.authorization import Authorization
+from src.tutto_api_client.models.entities import Occurrence, Relative
 from src.tutto_api_client.utils.filter_clean_utils import (
-    filter_dict_with_falsy_values,
     convert_dict_dates_to_isoformat,
+    filter_dict_with_falsy_values,
 )
 
 __all__ = ["Endpoint"]
@@ -29,7 +28,6 @@ class Endpoint(ABC):
     @abstractmethod
     def as_dict(self) -> dict:
         """Abstract method to return a dict of the class attributes."""
-        pass
 
     @abstractmethod
     def call(self, **kwargs) -> dict:

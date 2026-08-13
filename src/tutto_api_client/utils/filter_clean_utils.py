@@ -1,9 +1,9 @@
 """This module provides various utilities functions."""
 
-from typing import List, Literal, Any
 from datetime import date
-from pydoc import locate
 from operator import itemgetter
+from pydoc import locate
+from typing import Any, List, Literal
 
 
 def split_str_to_list(

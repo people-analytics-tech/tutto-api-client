@@ -1,9 +1,10 @@
 """Module to handle requests to an API."""
 
-import aiohttp
-from urllib.parse import urljoin
 from dataclasses import dataclass, field
 from typing import Any, Literal
+from urllib.parse import urljoin
+
+import aiohttp
 
 
 @dataclass(init=True, frozen=True)

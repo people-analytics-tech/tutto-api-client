@@ -1,22 +1,22 @@
 """This module provides the main client class for the Tutto API."""
 
-from typing import List
 from datetime import date
+from typing import List
 
+from src.tutto_api_client.core.endpoints_factory import _EndpointFactory
 from src.tutto_api_client.models.authorization import Authorization
-from src.tutto_api_client.models.entities import Relative, Occurrence
 from src.tutto_api_client.models.endpoints import (
     _Deductions,
-    _Purchases,
-    _ServiceTypes,
-    _DirfInfos,
     _DirfAdditionalInfos,
+    _DirfInfos,
     _Employees,
     _EmployeesOccupations,
     _Occupations,
+    _Purchases,
     _ServiceTickets,
+    _ServiceTypes,
 )
-from src.tutto_api_client.core.endpoints_factory import _EndpointFactory
+from src.tutto_api_client.models.entities import Occurrence, Relative
 
 __all__ = ["TuttoAPIClient"]
 
