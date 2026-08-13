@@ -26,7 +26,6 @@ class HTTPRequest:
         headers = headers or {}
         parameters = parameters or {}
 
-        # Combina a criação da sessão e a requisição em um único `async with`
         async with (
             aiohttp.ClientSession() as session,
             session.request(
