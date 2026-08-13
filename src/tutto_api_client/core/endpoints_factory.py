@@ -2,9 +2,9 @@
 
 from typing import Any
 
-from tutto_api_client.helpers.http import HTTPRequest
-from tutto_api_client.models.authorization import Authorization
-from tutto_api_client.models.endpoints import (
+from src.tutto_api_client.helpers.http import HTTPRequest
+from src.tutto_api_client.models.authorization import Authorization
+from src.tutto_api_client.models.endpoints import (
     _Deductions,
     _Purchases,
     _ServiceTypes,

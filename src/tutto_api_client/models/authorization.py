@@ -6,8 +6,8 @@ from typing import Union, Literal, List, Optional
 from dataclasses import dataclass
 from enum import Enum, auto
 
-from tutto_api_client.helpers.http import HTTPRequest
-from tutto_api_client.utils.filter_clean_utils import split_str_to_list
+from src.tutto_api_client.helpers.http import HTTPRequest
+from src.tutto_api_client.utils.filter_clean_utils import split_str_to_list
 
 
 class _TOKEN_ORIGIN(Enum):
