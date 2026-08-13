@@ -2,7 +2,7 @@
 
 from typing import Any
 
-from src.tutto_api_client.helpers.http import HTTPRequest
+from src.tutto_api_client.helpers.api_client import APIClient
 from src.tutto_api_client.models.authorization import Authorization
 from src.tutto_api_client.models.endpoints import (
     Endpoint,
@@ -104,7 +104,7 @@ class _EndpointFactory:
     ) -> Endpoint:
         """Factory method to create an endpoint object"""
         # Fill the services catalog with the required services
-        http_client = HTTPRequest(base_url=base_url)
+        http_client = APIClient(base_url=base_url)
         catalog_instance = _EndpointCatalog()
         catalog_instance.set_services(name="http_client", value=http_client)
         catalog_instance.set_services(name="authorization", value=authorization)
