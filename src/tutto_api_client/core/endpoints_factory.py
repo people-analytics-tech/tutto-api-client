@@ -2,9 +2,9 @@
 
 from typing import Any
 
-from src.tutto_api_client.helpers.api_client import APIClient
-from src.tutto_api_client.models.authorization import Authorization
-from src.tutto_api_client.models.endpoints import (
+from tutto_api_client.helpers.api_client import APIClient
+from tutto_api_client.models.authorization import Authorization
+from tutto_api_client.models.endpoints import (
     Endpoint,
     _Deductions,
     _DirfAdditionalInfos,

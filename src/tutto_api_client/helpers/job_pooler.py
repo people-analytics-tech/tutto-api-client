@@ -3,7 +3,7 @@ from __future__ import annotations
 import asyncio
 from typing import Any
 
-from src.tutto_api_client.helpers.http import HTTPRequest
+from tutto_api_client.helpers.http import HTTPRequest
 
 
 class AsyncJobPoller:

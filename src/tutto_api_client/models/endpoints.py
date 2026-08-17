@@ -8,10 +8,10 @@ from dataclasses import dataclass, field
 from datetime import date
 from typing import List
 
-from src.tutto_api_client.helpers.api_client import APIClient
-from src.tutto_api_client.models.authorization import Authorization
-from src.tutto_api_client.models.entities import Occurrence, Relative
-from src.tutto_api_client.utils.filter_clean_utils import (
+from tutto_api_client.helpers.api_client import APIClient
+from tutto_api_client.models.authorization import Authorization
+from tutto_api_client.models.entities import Occurrence, Relative
+from tutto_api_client.utils.filter_clean_utils import (
     convert_dict_dates_to_isoformat,
     filter_dict_with_falsy_values,
 )
