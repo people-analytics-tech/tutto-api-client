@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
-from src.tutto_api_client.helpers.http import HTTPRequest
-from src.tutto_api_client.helpers.job_pooler import AsyncJobPoller
+from tutto_api_client.helpers.http import HTTPRequest
+from tutto_api_client.helpers.job_pooler import AsyncJobPoller
 
 
 class APIClient:

@@ -3,9 +3,9 @@
 from datetime import date
 from typing import List
 
-from src.tutto_api_client.core.endpoints_factory import _EndpointFactory
-from src.tutto_api_client.models.authorization import Authorization
-from src.tutto_api_client.models.endpoints import (
+from tutto_api_client.core.endpoints_factory import _EndpointFactory
+from tutto_api_client.models.authorization import Authorization
+from tutto_api_client.models.endpoints import (
     _Deductions,
     _DirfAdditionalInfos,
     _DirfInfos,
@@ -16,7 +16,7 @@ from src.tutto_api_client.models.endpoints import (
     _ServiceTickets,
     _ServiceTypes,
 )
-from src.tutto_api_client.models.entities import Occurrence, Relative
+from tutto_api_client.models.entities import Occurrence, Relative
 
 __all__ = ["TuttoAPIClient"]
 
